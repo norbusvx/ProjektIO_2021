@@ -18,6 +18,7 @@ public class PPR_lab09 {
 
         //koment Norbert
         // mati
+        //komentarz dla testow
 
         Node nodeA = new Node("A");
         Node nodeB = new Node("B");
