@@ -17,6 +17,7 @@ public class PPR_lab09 {
         System.out.println("3");
 
         //koment Norbert
+        // mati
 
         Node nodeA = new Node("A");
         Node nodeB = new Node("B");
