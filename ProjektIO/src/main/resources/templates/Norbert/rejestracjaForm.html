@@ -36,7 +36,7 @@
     Hasło: <input type="text" th:field="*{haslo}"/>
     <span th:if="${#fields.hasErrors('haslo')}" th:each="err : ${#fields.errors('haslo')}" th:text="${err}"></span><br><br>
 
-    Nr urzędu pocztowego: <input type="text" th:field="*{nrUrzedu}"/>
+    Nr urzędu pocztowego: <input type="number" th:field="*{nrUrzedu}"/>
     <span th:if="${#fields.hasErrors('nrUrzedu')}" th:each="err : ${#fields.errors('nrUrzedu')}" th:text="${err}"></span><br><br>
 
 

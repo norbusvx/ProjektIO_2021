@@ -2,6 +2,8 @@ package com.example.lab04.controlers;
 
 
 import com.example.lab04.Uzytkownik;
+import com.example.lab04.services.UserDetailServiceImplementation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,6 +16,9 @@ import java.util.List;
 @RequestMapping("/Norbert")
 public class NorbertController {
 
+    @Autowired
+    UserDetailServiceImplementation userDetailServiceImplementation;
+
     @GetMapping("/rejestracja")
     public String rejestrujUzytkownika(Model model) {
 
@@ -24,18 +29,15 @@ public class NorbertController {
     @PostMapping(value = {"/rejestracja"})
     public String procesForm(@ModelAttribute Uzytkownik uzytkownik, BindingResult result) {
 
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
             return "Norbert/rejestracjaForm";
         }
 
-        //obrazRepozytorium.save(obraz);
+        userDetailServiceImplementation.dodajUzytkownika(uzytkownik);
 
 
         return "loginForm";
     }
-
-
-
 
 
     @GetMapping("/wyslijPrzelew")

@@ -14,12 +14,12 @@ public class IndexController {
     @Autowired
     UserDetailServiceImplementation userDetailServiceImplementation;
 
-    @RequestMapping("/")
-    public String zwrocGlowna(Model model){
-        model.addAttribute("userDoWypisania", new Uzytkownik("sadads", 5));
-
-        return "index";
-    }
+//    @RequestMapping("/")
+//    public String zwrocGlowna(Model model){
+//        model.addAttribute("userDoWypisania", userDetailServiceImplementation.zwrocUzytkownika());
+//
+//        return "index";
+//    }
 
 //    @ModelAttribute("userDoWypisania")
 //    public Uzytkownik zwrocUzytkownika(){return userDetailServiceImplementation.zwrocUzytkownika();}
