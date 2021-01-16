@@ -26,9 +26,22 @@ public class Przesylka {
 
     private boolean wydana;
 
+    private boolean wTransporcie;
+
     private Integer nrUrzedu;
 
 
+    public Przesylka(String imieNadawcy, String nazwiskoNadawcy, String imieOdbiorcy, String nazwiskoOdbiorcy, Adres adresNadawcy, Adres adresOdbiorcy, Integer nrUrzedu) {
+        this.imieNadawcy = imieNadawcy;
+        this.nazwiskoNadawcy = nazwiskoNadawcy;
+        this.imieOdbiorcy = imieOdbiorcy;
+        this.nazwiskoOdbiorcy = nazwiskoOdbiorcy;
+        this.adresNadawcy = adresNadawcy;
+        this.adresOdbiorcy = adresOdbiorcy;
+        this.nrUrzedu = nrUrzedu;
+        this.wTransporcie=false;
+        this.wydana=false;
+    }
 
     public Integer getId() {
         return id;
@@ -102,5 +115,11 @@ public class Przesylka {
         this.nrUrzedu = nrUrzedu;
     }
 
+    public boolean iswTransporcie() {
+        return wTransporcie;
+    }
 
+    public void setwTransporcie(boolean wTransporcie) {
+        this.wTransporcie = wTransporcie;
+    }
 }
