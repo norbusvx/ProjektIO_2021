@@ -1,2 +1,7 @@
-package com.example.lab04.repositories.RepozytoriaWspolne.bankPocztowy;public interface daneOsoboweRepozytorium {
+package com.example.lab04.repositories.RepozytoriaWspolne.bankPocztowy;
+
+import com.example.lab04.models.DaneOsobowe;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface DaneOsoboweRepozytorium extends JpaRepository<DaneOsobowe, Integer> {
 }

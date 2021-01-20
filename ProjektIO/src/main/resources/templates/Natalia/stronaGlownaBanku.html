@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Bank Pocztowy</title>
+    <div th:replace="~{/wspolne/fragmenty :: head}"/>
 </head>
 <body>
-$END$
+    <div th:replace="~{/wspolne/fragmenty :: menu}"/>
+
+    <table style="width:100%; border: black solid">
+        <tr>
+            <th>Konto</th>
+            <th>Transakcje</th>
+        </tr>
+        <tr>
+            <th><a href="#">Edytuj </a></th>
+            <th><a href="#">Wpłata </a></th>
+        </tr>
+        <tr>
+            <th><a href="/Natalia/Konto/dodaj">Dodaj </a></th>
+            <th><a href="#">Wypłata </a></th>
+        </tr>
+    </table>
+    <div th:replace="~{wspolne/fragmenty :: footer}"/>
 </body>
 </html>

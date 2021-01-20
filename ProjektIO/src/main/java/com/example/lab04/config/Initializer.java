@@ -4,6 +4,7 @@ package com.example.lab04.config;
 import com.example.lab04.Uzytkownik;
 
 import com.example.lab04.repositories.RepozytoriaWspolne.UzytkownikRepozytorium;
+import com.example.lab04.repositories.RepozytoriaWspolne.bankPocztowy.DaneOsoboweRepozytorium;
 import com.example.lab04.services.UserDetailServiceImplementation;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,8 @@ public class Initializer {
 
     @Autowired
     UserDetailServiceImplementation userDetailServiceImplementation;
+    @Autowired
+    DaneOsoboweRepozytorium daneOsoboweRepozytorium;
 
     @Bean
     InitializingBean init() {
@@ -32,8 +35,13 @@ public class Initializer {
                 uzytkownik = new Uzytkownik("user3", "user1", 1);
                 userDetailServiceImplementation.dodajUzytkownika(uzytkownik);
             }
-
-
+            /*if (daneOsoboweRepozytorium.findAll().isEmpty()) {
+                daneOsobowe daneOsobowe = new daneOsobowe("Natalia", "Koc",
+                        1045678912, 1234567,
+                        "CAS123", "ul. Brzeska 123/45, 08-110 Siedlce",
+                        123456789, "adres-email@email.com",
+                        "ul. Brzeska 123/45, 08-110 Siedlce");
+            }*/
         };
     }
 }
