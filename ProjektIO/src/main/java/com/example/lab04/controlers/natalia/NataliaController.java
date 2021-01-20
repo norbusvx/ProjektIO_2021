@@ -1,4 +1,4 @@
-package com.example.lab04.controlers;
+package com.example.lab04.controlers.natalia;
 
 
 import org.springframework.stereotype.Controller;
@@ -12,7 +12,6 @@ public class NataliaController {
 
     @GetMapping("/szegolyProduktu")
     public String szegolyProduktu(Model model) {
-        model.addAttribute("produkt", DatabaseDumps.produkty.get(1));
         return "szegolyProduktu";
     }
 
