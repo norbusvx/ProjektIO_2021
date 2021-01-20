@@ -33,4 +33,22 @@ public class KontoController {
         return "Natalia/konto/zatwierdzenieDanych";
     }
 
+    @GetMapping("/kontaktForm")
+    public String kontaktForm() {
+        //kontaktForm
+        return "Natalia/konto/kontaktForm";
+    }
+
+    @PostMapping("/szukajKlienta")
+    public String szukajKlienta(@ModelAttribute("numerKlienta") Model model, @Valid Integer numerKlienta, Errors result) {
+        if(result.hasErrors()) {
+            return "Natalia/konto/wyszukajKlienta";
+        }
+        DaneOsobowe daneOsobowe = daneOsoboweRepozytorium.findByNrKlienta(numerKlienta);
+        if(daneOsobowe == null) {
+            return "Natalia/konto/brakKlienta";
+        }
+        return "Natalia/konto/szczegolyKlienta";
+    }
+
 }

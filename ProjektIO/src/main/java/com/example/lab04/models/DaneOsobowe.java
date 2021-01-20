@@ -23,10 +23,11 @@ public class DaneOsobowe {
     private Integer nrTelefonu;
     private String adresEmail;
     private String adresDoKorespondencji;
+    private String wybranySposobKontaktowania;
 
     public DaneOsobowe(String imie, String nazwisko, Integer nrPESEL, Integer nrKlienta,
                        String seriaINumerDokumentuTozsamosci, String adresZamieszkania, Integer nrTelefonu,
-                       String adresEmail, String adresDoKorespondencji) {
+                       String adresEmail, String adresDoKorespondencji, String wybranySposobKontaktowania) {
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.nrPESEL = nrPESEL;
@@ -36,6 +37,7 @@ public class DaneOsobowe {
         this.nrTelefonu = nrTelefonu;
         this.adresEmail = adresEmail;
         this.adresDoKorespondencji = adresDoKorespondencji;
+        this.wybranySposobKontaktowania = wybranySposobKontaktowania;
     }
 
     public DaneOsobowe() {
