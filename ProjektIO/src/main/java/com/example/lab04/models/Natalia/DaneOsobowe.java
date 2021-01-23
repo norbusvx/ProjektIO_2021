@@ -1,4 +1,4 @@
-package com.example.lab04.models;
+package com.example.lab04.models.Natalia;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +17,7 @@ public class DaneOsobowe {
     private String imie;
     private String nazwisko;
     private Integer nrPESEL;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer nrKlienta;
     private String seriaINumerDokumentuTozsamosci;
     private String adresZamieszkania;
@@ -24,21 +25,6 @@ public class DaneOsobowe {
     private String adresEmail;
     private String adresDoKorespondencji;
     private String wybranySposobKontaktowania;
-
-    public DaneOsobowe(String imie, String nazwisko, Integer nrPESEL, Integer nrKlienta,
-                       String seriaINumerDokumentuTozsamosci, String adresZamieszkania, Integer nrTelefonu,
-                       String adresEmail, String adresDoKorespondencji, String wybranySposobKontaktowania) {
-        this.imie = imie;
-        this.nazwisko = nazwisko;
-        this.nrPESEL = nrPESEL;
-        this.nrKlienta = nrKlienta;
-        this.seriaINumerDokumentuTozsamosci = seriaINumerDokumentuTozsamosci;
-        this.adresZamieszkania = adresZamieszkania;
-        this.nrTelefonu = nrTelefonu;
-        this.adresEmail = adresEmail;
-        this.adresDoKorespondencji = adresDoKorespondencji;
-        this.wybranySposobKontaktowania = wybranySposobKontaktowania;
-    }
 
     public DaneOsobowe() {
 

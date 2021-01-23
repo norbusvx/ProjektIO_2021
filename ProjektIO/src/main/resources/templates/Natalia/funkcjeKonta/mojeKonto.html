@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Moje Konto</title>
+    <div th:replace="~{/wspolne/fragmenty :: head}"/>
 </head>
 <body>
-
+<div th:replace="~{/wspolne/fragmenty :: menu}"/>
+    <div style="margin-left: 10%">
+        <a href="#"> Edytuj Konto</a><br>
+        <a href="#"> Wypłata</a><br>
+        <a href="#"> Wpłata</a>
+    </div>
+<div th:replace="~{wspolne/fragmenty :: footer}"/>
 </body>
 </html>

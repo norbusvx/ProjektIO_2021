@@ -1,6 +1,6 @@
 package com.example.lab04.controlers.natalia;
 
-import com.example.lab04.models.DaneOsobowe;
+import com.example.lab04.models.Natalia.DaneOsobowe;
 import com.example.lab04.repositories.RepozytoriaWspolne.bankPocztowy.DaneOsoboweRepozytorium;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

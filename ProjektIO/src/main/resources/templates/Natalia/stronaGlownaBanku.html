@@ -7,25 +7,14 @@
 </head>
 <body>
     <div th:replace="~{/wspolne/fragmenty :: menu}"/>
-
-    <table style="width:100%; border: black solid">
-        <tr>
-            <th>Konto</th>
-            <th>Transakcje</th>
-        </tr>
-        <tr>
-            <th><a href="#">Edytuj </a></th>
-            <th><a href="#">Wpłata </a></th>
-        </tr>
-        <tr>
-            <th><a href="/Natalia/Konto/dodaj">Dodaj </a></th>
-            <th><a href="#">Wypłata </a></th>
-        </tr>
-        <tr>
-            <th><a href="/Natalia/Konto/kontaktForm">Wyszukaj </a></th>
-            <th><a href="#"> </a></th>
-        </tr>
-    </table>
+    <center>
+        <form th:method="post" th:action="@{zaloguj}" th:object="${daneOsobowe}">
+            <p>Numer klienta: <input th:field="*{nrKlienta}"></p>
+            <p>Hasło: <input th:field="*{haslo}"></p>
+            <input type="submit" value="Zaloguj"><br>
+            <button><a href="/Natalia/noweKonto/daneOsobowe" style="color: grey"> Stwórz nowe konto </a></button>
+        </form>
+    </center>
     <div th:replace="~{wspolne/fragmenty :: footer}"/>
 </body>
 </html>

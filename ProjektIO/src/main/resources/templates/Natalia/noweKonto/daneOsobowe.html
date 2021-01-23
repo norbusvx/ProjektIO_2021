@@ -7,12 +7,11 @@
 </head>
 <body>
 <div th:replace="~{/wspolne/fragmenty :: menu}"/>
-<form th:method="post" th:action="@{zapisz}" th:object="${daneOsobowe}">
+<form th:method="post" th:action="@{zapiszDaneOsobowe}" th:object="${daneOsobowe}">
     <table style="border: #070748" border="1" margin-left="20px">
         <tr><th>Imie</th><td><input th:field="*{imie}"></tr>
         <tr><th>Nazwisko</th><td><input th:field="*{nazwisko}"></tr>
         <tr><th>Numer PESEL</th><td><input th:field="*{nrPESEL}"></tr>
-        <tr><th>Numer klienta</th><td><input th:field="*{nrKlienta}"></tr>
         <tr><th>Seria i numer dokumentu tożsamości</th><td><input th:field="*{seriaINumerDokumentuTozsamosci}"></tr>
         <tr><th>Adres zamieszkania</th><td><input th:field="*{adresZamieszkania}"></tr>
         <tr><th>Numer telefonu</th><td><input th:field="*{nrTelefonu}"></tr>
