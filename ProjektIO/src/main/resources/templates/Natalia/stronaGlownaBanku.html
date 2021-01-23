@@ -8,10 +8,14 @@
 <body>
     <div th:replace="~{/wspolne/fragmenty :: menu}"/>
     <center>
-        <form th:method="post" th:action="@{zaloguj}" th:object="${daneOsobowe}">
-            <p>Numer klienta: <input th:field="*{nrKlienta}"></p>
-            <p>Hasło: <input th:field="*{haslo}"></p>
-            <input type="submit" value="Zaloguj"><br>
+        <form action="/zaloguj" modelAttribute="form" method="post">
+            <div>
+                <input type="number" name="username" placeholder="nr klienta"/>
+            </div>
+            <div>
+                <input type="password" name="password" placeholder="hasło"/>
+            </div>
+            <input type="submit" value="Zaloguj"/>
             <button><a href="/Natalia/noweKonto/daneOsobowe" style="color: grey"> Stwórz nowe konto </a></button>
         </form>
     </center>

@@ -2,15 +2,16 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Moje Konto</title>
+    <title>Transakcje</title>
     <div th:replace="~{/wspolne/fragmenty :: head}"/>
 </head>
 <body>
 <div th:replace="~{/wspolne/fragmenty :: menu}"/>
-    <div style="margin-left: 10%">
-        <a href="edycja/edycjaKonta"> Edytuj Konto</a><br>
-        <a href="transakcja/wyborTransakcji"> Transakcje </a>
-    </div>
+<div style="margin-left: 10%">
+    Edytuj:<br>
+    <a href="#"> Wpłata </a><br>
+    <a href="#"> Wypłata </a><br>
+</div>
 <div th:replace="~{wspolne/fragmenty :: footer}"/>
 </body>
 </html>

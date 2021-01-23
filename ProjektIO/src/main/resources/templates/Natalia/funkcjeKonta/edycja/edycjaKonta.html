@@ -2,19 +2,17 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edytuj Konto</title>
     <div th:replace="~{/wspolne/fragmenty :: head}"/>
 </head>
 <body>
 <div th:replace="~{/wspolne/fragmenty :: menu}"/>
-<br>
-<center>
-    <em>
-        Brak klienta w bazie danych.
-    </em>
-</center>
-<br>
-<a href="/Natalia/Glowna/bankPocztowy">Dalej</a>
+<div style="margin-left: 10%">
+    Edytuj:<br>
+    <a href="#"> Podstawowe dane</a><br>
+    <a href="#"> Dane do logowania</a><br>
+    <a href="#"> Limity na koncie</a>
+</div>
 <div th:replace="~{wspolne/fragmenty :: footer}"/>
 </body>
 </html>
