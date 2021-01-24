@@ -24,7 +24,6 @@ public class DaneOsobowe {
     @NotNull
     private String adresZamieszkania;
     @NotNull
-    @Size(min = 100000000, max = 999999999)
     private Integer nrTelefonu;
     @NotNull
     private String adresEmail;
@@ -33,9 +32,12 @@ public class DaneOsobowe {
     @NotNull
     private String wybranySposobKontaktowania;
     @OneToOne
-    private Bezpieczenstwo bezpieczenstwo;
+    private Bezpieczenstwo bezpieczenstwo = null;
+    @OneToOne
+    private Limity limity = null;
 
-    public DaneOsobowe(Integer id, String imie, String nazwisko, Integer nrPESEL, String seriaINumerDokumentuTozsamosci, String adresZamieszkania, Integer nrTelefonu, String adresEmail, String adresDoKorespondencji, String wybranySposobKontaktowania, Bezpieczenstwo bezpieczenstwo) {
+    public DaneOsobowe(Integer id, String imie, String nazwisko, Integer nrPESEL, String seriaINumerDokumentuTozsamosci,
+                       String adresZamieszkania, Integer nrTelefonu, String adresEmail, String adresDoKorespondencji, String wybranySposobKontaktowania, Bezpieczenstwo bezpieczenstwo) {
         this.id = id;
         this.imie = imie;
         this.nazwisko = nazwisko;

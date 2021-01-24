@@ -7,17 +7,11 @@
 </head>
 <body>
 <div th:replace="~{/wspolne/fragmenty :: menu}"/>
-<form th:method="post" th:action="@{zapiszDaneOsobowe}" th:object="${daneOsobowe}">
+<form th:method="post" th:action="@{/Natalia/Konto/zapiszLimity}" th:object="${limity}">
     <table style="border: #070748" border="1" margin-left="20px">
-        <tr><th>Imie</th><td><input th:field="*{imie}"></tr>
-        <tr><th>Nazwisko</th><td><input th:field="*{nazwisko}"></tr>
-        <tr><th>Numer PESEL</th><td><input th:field="*{nrPESEL}"></tr>
-        <tr><th>Seria i numer dokumentu tożsamości</th><td><input th:field="*{seriaINumerDokumentuTozsamosci}"></tr>
-        <tr><th>Adres zamieszkania</th><td><input th:field="*{adresZamieszkania}"></tr>
-        <tr><th>Numer telefonu</th><td><input th:field="*{nrTelefonu}"></tr>
-        <tr><th>Adres e-mail</th><td><input th:field="*{adresEmail}"></tr>
-        <tr><th>Adres do korespondencji</th><td><input th:field="*{adresDoKorespondencji}"></tr>
-        <tr><th>Preferowany sposób kontaku</th><td><input th:field="*{wybranySposobKontaktowania}"></tr>
+        <tr><th>Limit w bankomacie: </th><td><input th:field="*{bankomat}"></tr>
+        <tr><th>Limit w sklepie: </th><td><input th:field="*{sklep}"></tr>
+        <tr><th>Limit w przelewach internetowych: </th><td><input th:field="*{internet}"></tr>
         <tr>
             <td>
                 <button>

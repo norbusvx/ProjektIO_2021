@@ -16,18 +16,17 @@ public class Bezpieczenstwo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Size(min = 1000000, max = 9999999)
+    @NotNull
     private Integer nrKlienta;
     @NotNull
-    private String Haslo;
+    private String haslo;
     @NotNull
     private Integer PIN;
 
     public Bezpieczenstwo(Integer id, Integer nrKlienta, String haslo, Integer PIN) {
         this.id = id;
         this.nrKlienta = nrKlienta;
-        Haslo = haslo;
+        this.haslo = haslo;
         this.PIN = PIN;
     }
 

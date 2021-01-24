@@ -6,7 +6,6 @@ import com.example.lab04.models.Natalia.Zalogowany;
 import com.example.lab04.repositories.RepozytoriaWspolne.bankPocztowy.BezpieczenstwoRepozytorium;
 import com.example.lab04.repositories.RepozytoriaWspolne.bankPocztowy.DaneOsoboweRepozytorium;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.trace.http.HttpTrace;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -32,14 +31,22 @@ public class StronaGlownaController {
 
     @PostMapping("/zaloguj")
     public String zaloguj(@ModelAttribute("form") @Valid FormularzDTO form, Errors result) {
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             return "Natalia/stronaGlownaBanku";
         }
-        Bezpieczenstwo znalezionyKlient = bezpieczenstwoRepozytorium.findByNrKlienta(form.getNrKlienta());
+        Bezpieczenstwo znalezionyKlient = bezpieczenstwoRepozytorium.findByNrKlientaOrPIN(
+                form.getNrKlienta(), form.getNrKlienta());
         zalogowany.setIdZalogowanego(znalezionyKlient.getId());
         zalogowany.setNrZalogowanegoKlienta(znalezionyKlient.getNrKlienta());
         zalogowany.setPINzalogowanego(znalezionyKlient.getPIN());
-        return "/Natalia/funkcjeKonta/mojeKonto";
+        return "Natalia/mojeKonto";
     }
 
+    @GetMapping("/noweKonto")
+    public String noweKonto(Model model) {
+        DaneOsobowe daneOsobowe = new DaneOsobowe();
+        model.addAttribute("daneOsobowe", daneOsobowe);
+        //przekierowanie na strone glowna banku
+        return "Natalia/noweKonto/daneOsobowe";
+    }
 }

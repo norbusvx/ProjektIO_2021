@@ -4,5 +4,5 @@ import com.example.lab04.models.Natalia.Bezpieczenstwo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface BezpieczenstwoRepozytorium extends JpaRepository<Bezpieczenstwo, Integer> {
-    Bezpieczenstwo findByNrKlienta(Integer nrKlienta);
+    Bezpieczenstwo findByNrKlientaOrPIN(Integer nrKlienta, Integer PIN);
 }

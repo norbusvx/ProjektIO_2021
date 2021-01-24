@@ -7,9 +7,9 @@
 </head>
 <body>
 <div th:replace="~{/wspolne/fragmenty :: menu}"/>
-<form th:method="post" th:action="@{zapiszDaneOsobowe}" th:object="${daneOsobowe}">
+<form th:method="post" th:action="@{/Natalia/Konto/zapiszDaneOsobowe}" th:object="${daneOsobowe}">
     <table style="border: #070748" border="1" margin-left="20px">
-        <tr><th>Imie</th><td><input th:field="*{imie}"></tr>
+        <tr><th>Imie</th><td><input th:field="*{imie}"><input type="hidden" th:field="*{id}"></tr>
         <tr><th>Nazwisko</th><td><input th:field="*{nazwisko}"></tr>
         <tr><th>Numer PESEL</th><td><input th:field="*{nrPESEL}"></tr>
         <tr><th>Seria i numer dokumentu tożsamości</th><td><input th:field="*{seriaINumerDokumentuTozsamosci}"></tr>
