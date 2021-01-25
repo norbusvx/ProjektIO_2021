@@ -3,9 +3,11 @@ package com.example.lab04.controlers.natalia;
 import com.example.lab04.models.Natalia.Bezpieczenstwo;
 import com.example.lab04.models.Natalia.DaneOsobowe;
 import com.example.lab04.models.Natalia.Limity;
+import com.example.lab04.models.Natalia.Rachunek;
 import com.example.lab04.repositories.RepozytoriaWspolne.bankPocztowy.BezpieczenstwoRepozytorium;
 import com.example.lab04.repositories.RepozytoriaWspolne.bankPocztowy.DaneOsoboweRepozytorium;
 import com.example.lab04.repositories.RepozytoriaWspolne.bankPocztowy.LimityRepozytorium;
+import com.example.lab04.repositories.RepozytoriaWspolne.bankPocztowy.RachunekRepozytorium;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,10 +27,11 @@ public class KontoController {
     LimityRepozytorium limityRepozytorium;
     @Autowired
     BezpieczenstwoRepozytorium bezpieczenstwoRepozytorium;
+    @Autowired
+    RachunekRepozytorium rachunekRepozytorium;
     Bezpieczenstwo bezpieczenstwo;
     Limity limity;
     DaneOsobowe daneOsobowe;
-    private Integer id = 100;
 
     @GetMapping("/dodaj")
     public String dodaj(Model model) {
@@ -53,18 +56,23 @@ public class KontoController {
         }
         limityRepozytorium.save(limity);
         daneOsobowe.setLimity(limity);
-        model.addAttribute("bezpieczenstwo", new Bezpieczenstwo());
+        Bezpieczenstwo bezpieczenstwo = new Bezpieczenstwo();
+        bezpieczenstwo.setNrKlienta(2548619);
+        model.addAttribute("bezpieczenstwo", bezpieczenstwo);
         return "Natalia/noweKonto/bezpieczenstwo";
     }
 
     @PostMapping("/zapiszBezpieczenstwo")
-    public String zapiszBezpieczenstwo(@ModelAttribute("bezpieczenstwo") @Valid Bezpieczenstwo bezpieczenstwo, Errors result, Model model) {
+    public String zapiszBezpieczenstwo(@ModelAttribute("bezpieczenstwo") @Valid Bezpieczenstwo bezpieczenstwo, Errors result) {
         if(result.hasErrors()) {
             return "Natalia/noweKonto/bezpieczenstwo";
         }
+        bezpieczenstwo.setNrKlienta(2548619);
         bezpieczenstwoRepozytorium.save(bezpieczenstwo);
         daneOsobowe.setBezpieczenstwo(bezpieczenstwo);
+        Rachunek rachunek = new Rachunek(0.0f, "PLN", daneOsobowe);
         daneOsoboweRepozytorium.save(daneOsobowe);
+        rachunekRepozytorium.save(rachunek);
         return "Natalia/stronaGlownaBanku";
     }
 }

@@ -8,8 +8,49 @@
 <body>
 <div th:replace="~{/wspolne/fragmenty :: menu}"/>
     <div style="margin-left: 10%">
-        <a href="edycja/edycjaKonta"> Edytuj Konto</a><br>
-        <a href="transakcja/wyborTransakcji"> Transakcje </a>
+        <table th:object="${daneOsobowe}" style="width: 80%; border: thin grey">
+            <tr>
+                <th>
+                    <em> Witaj ponownie </em><em th:text="*{imie}"/>!
+                </th>
+                <td style="text-align: right">
+                    <button><a href="edycja/edycjaKonta"> Edytuj Konto</a></button>
+                    <button><a href="transakcja/wyborTransakcji"> Transakcje </a></button>
+                </td>
+            </tr>
+        </table>
+        <table th:object="${bezpieczenstwo}" style="width: 80%; border: thin grey">
+            <tr>
+                <p> Numer klienta: <em th:text="*{nrKlienta}"/></p>
+            </tr>
+        </table>
+        <br>
+        <table th:object="${rachunek}" style="width: 20%;">
+            <tr>
+                <th>Saldo konta: </th><td th:text="*{saldoKonta}"></td>
+            </tr>
+            <tr>
+                <th>Waluta: </th><td th:text="*{waluta}"></td>
+            </tr>
+        </table>
+        <br>
+        <table style="width: 80%;">
+            <tr> <th colspan="2"> Historia: </th></tr>
+            <tr style="background: lavender">
+                <th>Rodzaj<br>transakcji</th>
+                <th>Opis</th>
+                <th>Kwota</th>
+                <th>Data operacji</th>
+                <th>Saldo konta<br>po operacji</th>
+            </tr>
+            <tr th:each="Tenprodukt : ${historia}" style="border: solid grey">
+                <td th:text="${Tenprodukt.typTransakcji}"></td>
+                <td th:text="${Tenprodukt.opis}"></td>
+                <td th:text="${Tenprodukt.kwota}"></td>
+                <td th:text="${Tenprodukt.dataOperacji}"></td>
+                <td th:text="${Tenprodukt.saldoPoOperacji}"> </td>
+            </tr>
+        </table>
     </div>
 <div th:replace="~{wspolne/fragmenty :: footer}"/>
 </body>

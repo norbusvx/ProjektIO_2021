@@ -22,8 +22,7 @@ public class Rachunek {
     @OneToOne
     private DaneOsobowe daneOsobowe;
 
-    public Rachunek(Integer id, Float saldoKonta, String waluta, DaneOsobowe daneOsobowe) {
-        this.id = id;
+    public Rachunek(Float saldoKonta, String waluta, DaneOsobowe daneOsobowe) {
         this.saldoKonta = saldoKonta;
         this.waluta = waluta;
         this.daneOsobowe = daneOsobowe;

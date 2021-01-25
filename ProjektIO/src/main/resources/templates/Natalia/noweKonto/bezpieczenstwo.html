@@ -9,7 +9,7 @@
 <div th:replace="~{/wspolne/fragmenty :: menu}"/>
     <form th:method="post" th:action="@{/Natalia/Konto/zapiszBezpieczenstwo}" th:object="${bezpieczenstwo}">
         <table style="border: #070748" border="1" margin-left="20px">
-            <tr><th>Numer konta: </th><td><input th:field="*{nrKlienta}"></tr>
+            <input type="hidden" th:field="*{nrKlienta}">
             <tr><th>Hasło: </th><td><input type="password" th:field="*{haslo}"></tr>
             <tr><th>PIN: </th><td><input th:field="*{PIN}"></tr>
             <tr>
