@@ -7,7 +7,7 @@
 </head>
 <body>
 <div th:replace="~{/wspolne/fragmenty :: menu}"/>
-<form th:method="post" th:action="@{/Natalia/Konto/zapiszDaneOsobowe}" th:object="${daneOsobowe}">
+<form th:method="post" th:action="@{/Natalia/Konto/zapiszNoweDaneOsobowe}" th:object="${daneDoZapisu}">
     <table style="border: #070748" border="1" margin-left="20px">
         <tr><th>Imie</th><td><input th:field="*{imie}"><input type="hidden" th:field="*{id}"></tr>
         <tr><th>Nazwisko</th><td><input th:field="*{nazwisko}"></tr>
@@ -21,7 +21,7 @@
         <tr>
             <td>
                 <button>
-                    <a href="/Natalia/Glowna/bankPocztowy" style="color: black"> Anuluj </a>
+                    <a href="/Natalia/Konto/edycjaKonta" style="color: black"> Anuluj </a>
                 </button>
             </td>
             <td>

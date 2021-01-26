@@ -69,4 +69,22 @@ public class EdycjaTransakcjeController {
         //przekierowanie na strone glowna banku
         return "Natalia/funkcjeKonta/transakcja/wyborTransakcji";
     }
+
+    @GetMapping("/edycjaPodstawowychDanych")
+    public String edycjaPodstawowychDanych(Model model) {
+        model.addAttribute("daneDoZapisu", daneOsobowe);
+        return "Natalia/funkcjeKonta/edycja/edytujKonto/daneOsobowe";
+    }
+
+    @PostMapping("/zapiszNoweDaneOsobowe")
+    public String zapiszNoweDaneOsobowe(@ModelAttribute("daneDoZapisu") @Valid DaneOsobowe daneDoZapisu, Errors result) {
+        if(result.hasErrors()) {
+            return "Natalia/funkcjeKonta/edycja/edytujKonto/daneOsobowe";
+        }
+        daneDoZapisu.setBezpieczenstwo(bezpieczenstwo);
+        daneDoZapisu.setLimity(limity);
+        daneOsoboweRepozytorium.save(daneDoZapisu);
+        daneOsobowe = daneOsoboweRepozytorium.findByBezpieczenstwo(bezpieczenstwo);
+        return "Natalia/funkcjeKonta/edycja/edycjaKonta";
+    }
 }
