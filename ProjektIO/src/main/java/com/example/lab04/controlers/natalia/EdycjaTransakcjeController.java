@@ -36,13 +36,14 @@ public class EdycjaTransakcjeController {
         if (result.hasErrors()) {
             return "Natalia/stronaGlownaBanku";
         }
+
         bezpieczenstwo = bezpieczenstwoRepozytorium.findByNrKlientaOrPIN(
                 form.getNrKlienta(), form.getNrKlienta());
         zalogowany.setIdZalogowanego(bezpieczenstwo.getId());
         zalogowany.setNrZalogowanegoKlienta(bezpieczenstwo.getNrKlienta());
         zalogowany.setPINzalogowanego(bezpieczenstwo.getPIN());
         model.addAttribute("bezpieczenstwo", bezpieczenstwo);
-        daneOsobowe = daneOsoboweRepozytorium.findByBezpieczenstwo(bezpieczenstwo);
+        daneOsobowe = daneOsoboweRepozytorium.findByBezpieczenstwo(bezpieczenstwo);//TODO limity
         model.addAttribute("daneOsobowe", daneOsobowe);
         model.addAttribute("historia", historiaRepozytorium.findAllByDaneOsobowe(daneOsobowe));
         model.addAttribute("rachunek", rachunekRepozytorium.findByDaneOsobowe(daneOsobowe));
@@ -85,6 +86,38 @@ public class EdycjaTransakcjeController {
         daneDoZapisu.setLimity(limity);
         daneOsoboweRepozytorium.save(daneDoZapisu);
         daneOsobowe = daneOsoboweRepozytorium.findByBezpieczenstwo(bezpieczenstwo);
+        return "Natalia/funkcjeKonta/edycja/edycjaKonta";
+    }
+
+
+    @GetMapping("/edycjaPIN")
+    public String edycjaBezpieczenstwo(Model model) {
+        model.addAttribute("bezpieczenstwoDoZapisu", bezpieczenstwo);
+        return "Natalia/funkcjeKonta/edycja/edytujKonto/bezpieczenstwo";
+    }
+
+    @PostMapping("/zapiszNowyPIN")
+    public String zapiszNoweBezpieczenstwo(@ModelAttribute("bezpieczenstwoDoZapisu") @Valid Bezpieczenstwo bezpieczenstwoDoZapisu, Errors result) {
+        if(result.hasErrors()) {
+            return "Natalia/funkcjeKonta/edycja/edytujKonto/bezpieczenstwo";
+        }
+        bezpieczenstwo = bezpieczenstwoRepozytorium.save(bezpieczenstwoDoZapisu);
+        return "Natalia/funkcjeKonta/edycja/edycjaKonta";
+    }
+
+
+    @GetMapping("/edycjaHaslo")
+    public String edycjaHaslo(Model model) {
+        model.addAttribute("noweHaslo", bezpieczenstwo);
+        return "Natalia/funkcjeKonta/edycja/edytujKonto/haslo";
+    }
+
+    @PostMapping("/zapiszNoweHaslo")
+    public String zapiszNoweHaslo(@ModelAttribute("noweHaslo") @Valid Bezpieczenstwo noweHaslo, Errors result) {
+        if(result.hasErrors()) {
+            return "Natalia/funkcjeKonta/edycja/edytujKonto/haslo";
+        }
+        bezpieczenstwo = bezpieczenstwoRepozytorium.save(noweHaslo);
         return "Natalia/funkcjeKonta/edycja/edycjaKonta";
     }
 }

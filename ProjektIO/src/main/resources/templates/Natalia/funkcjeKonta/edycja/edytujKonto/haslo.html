@@ -7,13 +7,13 @@
 </head>
 <body>
 <div th:replace="~{/wspolne/fragmenty :: menu}"/>
-    <form th:method="post" th:action="@{/Natalia/Konto/zapiszNowyPIN}" th:object="${bezpieczenstwoDoZapisu}">
+    <form th:method="post" th:action="@{/Natalia/Konto/zapiszNoweHaslo}" th:object="${noweHaslo}">
         <table style="border: #070748" border="1" margin-left="20px">
             <input type="hidden" th:field="*{id}">
             <input type="hidden" th:field="*{nrKlienta}">
-
-            <tr><th>PIN: </th><td><input th:field="*{PIN}"></tr>
-            <tr><th>Hasło: </th><td><input type="password" th:field="*{haslo}"></tr>
+            <input type="hidden" th:field="*{PIN}"></tr>
+            <tr><th>Stare hasło: </th><td><input type="password"></tr>
+            <tr><th>Nowe hasło: </th><td><input type="password" th:field="*{haslo}"></tr>
             <tr>
                 <td>
                     <button>
