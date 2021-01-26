@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div th:replace="~{/wspolne/fragmenty :: head}"/>
+</head>
+<body>
+<div th:replace="~{/wspolne/fragmenty :: menu}"/>
+<form th:method="post" th:action="@{/Natalia/Konto/zapiszLimity}" th:object="${limity}">
+    <table style="border: #070748" border="1" margin-left="20px">
+        <tr><th>Limit w bankomacie: </th><td><input th:field="*{bankomat}"></tr>
+        <tr><th>Limit w sklepie: </th><td><input th:field="*{sklep}"></tr>
+        <tr><th>Limit w przelewach internetowych: </th><td><input th:field="*{internet}"></tr>
+        <tr>
+            <td>
+                <button>
+                    <a href="/Natalia/Glowna/bankPocztowy" style="color: black"> Anuluj </a>
+                </button>
+            </td>
+            <td>
+                <input type="submit" value="Zapisz">
+            </td>
+        </tr>
+    </table>
+</form>
+<div th:replace="~{wspolne/fragmenty :: footer}"/>
+</body>
+</html>

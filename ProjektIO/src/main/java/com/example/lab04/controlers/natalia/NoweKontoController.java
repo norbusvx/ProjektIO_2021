@@ -1,13 +1,7 @@
 package com.example.lab04.controlers.natalia;
 
-import com.example.lab04.models.Natalia.Bezpieczenstwo;
-import com.example.lab04.models.Natalia.DaneOsobowe;
-import com.example.lab04.models.Natalia.Limity;
-import com.example.lab04.models.Natalia.Rachunek;
-import com.example.lab04.repositories.RepozytoriaWspolne.bankPocztowy.BezpieczenstwoRepozytorium;
-import com.example.lab04.repositories.RepozytoriaWspolne.bankPocztowy.DaneOsoboweRepozytorium;
-import com.example.lab04.repositories.RepozytoriaWspolne.bankPocztowy.LimityRepozytorium;
-import com.example.lab04.repositories.RepozytoriaWspolne.bankPocztowy.RachunekRepozytorium;
+import com.example.lab04.models.Natalia.*;
+import com.example.lab04.repositories.RepozytoriaWspolne.bankPocztowy.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +14,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/Natalia/Konto")
-public class KontoController {
+public class NoweKontoController {
     @Autowired
     DaneOsoboweRepozytorium daneOsoboweRepozytorium;
     @Autowired
@@ -29,14 +23,23 @@ public class KontoController {
     BezpieczenstwoRepozytorium bezpieczenstwoRepozytorium;
     @Autowired
     RachunekRepozytorium rachunekRepozytorium;
-    Bezpieczenstwo bezpieczenstwo;
-    Limity limity;
+    @Autowired
+    HistoriaRepozytorium historiaRepozytorium;
+
     DaneOsobowe daneOsobowe;
 
     @GetMapping("/dodaj")
     public String dodaj(Model model) {
         model.addAttribute("daneOsobowe", new DaneOsobowe());
         return"Natalia/noweKonto/daneOsobowe";
+    }
+
+    @GetMapping("/noweKonto")
+    public String noweKonto(Model model) {
+        DaneOsobowe daneOsobowe = new DaneOsobowe();
+        model.addAttribute("daneOsobowe", daneOsobowe);
+        //przekierowanie na strone glowna banku
+        return "Natalia/noweKonto/daneOsobowe";
     }
 
     @PostMapping("/zapiszDaneOsobowe")
@@ -57,7 +60,7 @@ public class KontoController {
         limityRepozytorium.save(limity);
         daneOsobowe.setLimity(limity);
         Bezpieczenstwo bezpieczenstwo = new Bezpieczenstwo();
-        bezpieczenstwo.setNrKlienta(2548619);
+        bezpieczenstwo.setNrKlienta(2548615);
         model.addAttribute("bezpieczenstwo", bezpieczenstwo);
         return "Natalia/noweKonto/bezpieczenstwo";
     }
@@ -67,7 +70,7 @@ public class KontoController {
         if(result.hasErrors()) {
             return "Natalia/noweKonto/bezpieczenstwo";
         }
-        bezpieczenstwo.setNrKlienta(2548619);
+        bezpieczenstwo.setNrKlienta(2548615);
         bezpieczenstwoRepozytorium.save(bezpieczenstwo);
         daneOsobowe.setBezpieczenstwo(bezpieczenstwo);
         Rachunek rachunek = new Rachunek(0.0f, "PLN", daneOsobowe);

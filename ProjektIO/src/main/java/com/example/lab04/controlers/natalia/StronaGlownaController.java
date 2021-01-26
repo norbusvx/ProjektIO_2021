@@ -35,24 +35,6 @@ public class StronaGlownaController {
         return "Natalia/stronaGlownaBanku";
     }
 
-    @PostMapping("/zaloguj")
-    public String zaloguj(@ModelAttribute("form") @Valid FormularzDTO form, Errors result, Model model) {
-        if (result.hasErrors()) {
-            return "Natalia/stronaGlownaBanku";
-        }
-        Bezpieczenstwo znalezionyKlient = bezpieczenstwoRepozytorium.findByNrKlientaOrPIN(
-                form.getNrKlienta(), form.getNrKlienta());
-        zalogowany.setIdZalogowanego(znalezionyKlient.getId());
-        zalogowany.setNrZalogowanegoKlienta(znalezionyKlient.getNrKlienta());
-        zalogowany.setPINzalogowanego(znalezionyKlient.getPIN());
-        model.addAttribute("bezpieczenstwo", znalezionyKlient);
-        DaneOsobowe daneOsobowe = daneOsoboweRepozytorium.findByBezpieczenstwo(znalezionyKlient);
-        model.addAttribute("daneOsobowe", daneOsobowe);
-        model.addAttribute("historia", historiaRepozytorium.findAllByDaneOsobowe(daneOsobowe));
-        model.addAttribute("rachunek", rachunekRepozytorium.findByDaneOsobowe(daneOsobowe));
-        return "Natalia/mojeKonto";
-    }
-
     @GetMapping("/noweKonto")
     public String noweKonto(Model model) {
         DaneOsobowe daneOsobowe = new DaneOsobowe();
