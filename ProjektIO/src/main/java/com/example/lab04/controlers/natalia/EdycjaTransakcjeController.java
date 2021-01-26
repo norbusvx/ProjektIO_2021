@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/Natalia/Konto")
@@ -28,6 +29,7 @@ public class EdycjaTransakcjeController {
 
     Bezpieczenstwo bezpieczenstwo;
     Limity limity;
+    Rachunek rachunek;
     DaneOsobowe daneOsobowe;
     Zalogowany zalogowany = new Zalogowany();
 
@@ -47,7 +49,8 @@ public class EdycjaTransakcjeController {
         limity = daneOsobowe.getLimity();
         model.addAttribute("daneOsobowe", daneOsobowe);
         model.addAttribute("historia", historiaRepozytorium.findAllByDaneOsobowe(daneOsobowe));
-        model.addAttribute("rachunek", rachunekRepozytorium.findByDaneOsobowe(daneOsobowe));
+        rachunek = rachunekRepozytorium.findByDaneOsobowe(daneOsobowe);
+        model.addAttribute("rachunek", rachunek);
         return "Natalia/mojeKonto";
     }
 
@@ -138,5 +141,40 @@ public class EdycjaTransakcjeController {
         }
         limity = limityRepozytorium.save(noweLimity);
         return "Natalia/funkcjeKonta/edycja/edycjaKonta";
+    }
+
+    @GetMapping("/formularzTransakcji")
+    public String formularzWplata(Model model) {
+        model.addAttribute("form", new ModelTransakcje());
+        return "Natalia/funkcjeKonta/transakcja/formularz";
+    }
+
+
+    @PostMapping("/zapiszTransakcje")
+    public String zapiszTransakcje(@ModelAttribute("form") @Valid ModelTransakcje form, Errors result, Model model) {
+        if(result.hasErrors()) {
+            return "Natalia/funkcjeKonta/transakcja/formularz";
+        }
+
+        if(form.getKtoraTransakcja().equals("wplata")) {
+            rachunek.setSaldoKonta(rachunek.getSaldoKonta()+form.getKwota());
+            rachunek = rachunekRepozytorium.save(rachunek);
+            Historia historia = new Historia(form.getKwota(), LocalDate.now(), "Wpłata", "wplata", rachunek.getSaldoKonta(), daneOsobowe);
+            historiaRepozytorium.save(historia);
+        } else if(form.getKtoraTransakcja().equals("wyplata")) {
+            if(form.getKwota() < rachunek.getSaldoKonta()) {
+                rachunek.setSaldoKonta(rachunek.getSaldoKonta() - form.getKwota());
+                rachunek = rachunekRepozytorium.save(rachunek);
+                Historia historia = new Historia(form.getKwota(), LocalDate.now(), "Wypłata", "wyplata", rachunek.getSaldoKonta(), daneOsobowe);
+                historiaRepozytorium.save(historia);
+            } else {
+                return "Natalia/funkcjeKonta/transakcja/brakSrodkow";
+            }
+        }
+        model.addAttribute("bezpieczenstwo", bezpieczenstwo);
+        model.addAttribute("daneOsobowe", daneOsobowe);
+        model.addAttribute("historia", historiaRepozytorium.findAllByDaneOsobowe(daneOsobowe));
+        model.addAttribute("rachunek", rachunekRepozytorium.findByDaneOsobowe(daneOsobowe));
+        return "Natalia/mojeKonto";
     }
 }

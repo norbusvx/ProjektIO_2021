@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Bank Pocztowy</title>
+    <div th:replace="~{/wspolne/fragmenty :: head}"/>
+</head>
+<body>
+<div th:replace="~{/wspolne/fragmenty :: menu}"/>
+<center>
+    <form th:action="@{/Natalia/Konto/zapiszTransakcje}" modelAttribute="form" method="post">
+        <div>
+            Kwota: <input type="number" name="kwota" placeholder="kwota"/>
+        </div>
+        <div>
+            <input type="radio" name="ktoraTransakcja" value="wplata"> Wpłata
+            <input type="radio" name="ktoraTransakcja" value="wyplata"> Wypłata <br>
+        </div>
+        <input type="submit" value="Wykonaj transakcje"/>
+        <button><a href="/Natalia/Konto/mojeKonto" style="color: grey"> Anuluj </a></button>
+    </form>
+</center>
+<div th:replace="~{wspolne/fragmenty :: footer}"/>
+</body>
+</html>

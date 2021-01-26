@@ -29,8 +29,7 @@ public class Historia {
     @ManyToOne
     public DaneOsobowe daneOsobowe;
 
-    public Historia(Integer id, Float kwota, LocalDate dataOperacji, String typTransakcji, String opis, Float saldoPoOperacji, DaneOsobowe daneOsobowe) {
-        this.id = id;
+    public Historia(Float kwota, LocalDate dataOperacji, String typTransakcji, String opis, Float saldoPoOperacji, DaneOsobowe daneOsobowe) {
         this.kwota = kwota;
         this.dataOperacji = dataOperacji;
         this.typTransakcji = typTransakcji;

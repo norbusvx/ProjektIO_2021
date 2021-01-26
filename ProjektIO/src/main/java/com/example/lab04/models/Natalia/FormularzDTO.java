@@ -1,4 +1,4 @@
-package com.example.lab04.controlers.natalia;
+package com.example.lab04.models.Natalia;
 
 public class FormularzDTO {
     private Integer nrKlienta;
