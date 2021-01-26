@@ -43,7 +43,8 @@ public class EdycjaTransakcjeController {
         zalogowany.setNrZalogowanegoKlienta(bezpieczenstwo.getNrKlienta());
         zalogowany.setPINzalogowanego(bezpieczenstwo.getPIN());
         model.addAttribute("bezpieczenstwo", bezpieczenstwo);
-        daneOsobowe = daneOsoboweRepozytorium.findByBezpieczenstwo(bezpieczenstwo);//TODO limity
+        daneOsobowe = daneOsoboweRepozytorium.findByBezpieczenstwo(bezpieczenstwo);
+        limity = daneOsobowe.getLimity();
         model.addAttribute("daneOsobowe", daneOsobowe);
         model.addAttribute("historia", historiaRepozytorium.findAllByDaneOsobowe(daneOsobowe));
         model.addAttribute("rachunek", rachunekRepozytorium.findByDaneOsobowe(daneOsobowe));
@@ -118,6 +119,24 @@ public class EdycjaTransakcjeController {
             return "Natalia/funkcjeKonta/edycja/edytujKonto/haslo";
         }
         bezpieczenstwo = bezpieczenstwoRepozytorium.save(noweHaslo);
+        return "Natalia/funkcjeKonta/edycja/edycjaKonta";
+    }
+
+
+
+
+    @GetMapping("/edycjaLimity")
+    public String edycjaLimity(Model model) {
+        model.addAttribute("noweLimity", limity);
+        return "Natalia/funkcjeKonta/edycja/edytujKonto/limity";
+    }
+
+    @PostMapping("/zapiszNoweLimity")
+    public String zapiszNoweLimity(@ModelAttribute("noweLimity") @Valid Limity noweLimity, Errors result) {
+        if(result.hasErrors()) {
+            return "Natalia/funkcjeKonta/edycja/edytujKonto/limity";
+        }
+        limity = limityRepozytorium.save(noweLimity);
         return "Natalia/funkcjeKonta/edycja/edycjaKonta";
     }
 }

@@ -7,15 +7,16 @@
 </head>
 <body>
 <div th:replace="~{/wspolne/fragmenty :: menu}"/>
-<form th:method="post" th:action="@{/Natalia/Konto/zapiszLimity}" th:object="${limity}">
+<form th:method="post" th:action="@{/Natalia/Konto/zapiszLimity}" th:object="${noweLimity}">
     <table style="border: #070748" border="1" margin-left="20px">
+        <input type="hidden" th:field="*{id}"/>
         <tr><th>Limit w bankomacie: </th><td><input th:field="*{bankomat}"></tr>
         <tr><th>Limit w sklepie: </th><td><input th:field="*{sklep}"></tr>
         <tr><th>Limit w przelewach internetowych: </th><td><input th:field="*{internet}"></tr>
         <tr>
             <td>
                 <button>
-                    <a href="/Natalia/Glowna/bankPocztowy" style="color: black"> Anuluj </a>
+                    <a href="/Natalia/Konto/zapiszNoweLimity" style="color: black"> Anuluj </a>
                 </button>
             </td>
             <td>
