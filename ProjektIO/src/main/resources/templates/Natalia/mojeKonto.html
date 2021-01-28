@@ -38,14 +38,12 @@
             <tr> <th colspan="2"> Historia: </th></tr>
             <tr style="background: lavender">
                 <th>Rodzaj<br>transakcji</th>
-                <th>Opis</th>
                 <th>Kwota</th>
                 <th>Data operacji</th>
                 <th>Saldo konta<br>po operacji</th>
             </tr>
             <tr th:each="Tenprodukt : ${historia}" style="border: solid grey">
                 <td th:text="${Tenprodukt.typTransakcji}"></td>
-                <td th:text="${Tenprodukt.opis}"></td>
                 <td th:text="${Tenprodukt.kwota}"></td>
                 <td th:text="${Tenprodukt.dataOperacji}"></td>
                 <td th:text="${Tenprodukt.saldoPoOperacji}"> </td>

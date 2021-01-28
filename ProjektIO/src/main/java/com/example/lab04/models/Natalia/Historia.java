@@ -22,18 +22,15 @@ public class Historia {
     @NotNull
     private String typTransakcji;
     @NotNull
-    private String opis;
-    @NotNull
     @NumberFormat(pattern = "#.00")
     private Float saldoPoOperacji;
     @ManyToOne
     public DaneOsobowe daneOsobowe;
 
-    public Historia(Float kwota, LocalDate dataOperacji, String typTransakcji, String opis, Float saldoPoOperacji, DaneOsobowe daneOsobowe) {
+    public Historia(Float kwota, LocalDate dataOperacji, String typTransakcji, Float saldoPoOperacji, DaneOsobowe daneOsobowe) {
         this.kwota = kwota;
         this.dataOperacji = dataOperacji;
         this.typTransakcji = typTransakcji;
-        this.opis = opis;
         this.saldoPoOperacji = saldoPoOperacji;
         this.daneOsobowe = daneOsobowe;
     }

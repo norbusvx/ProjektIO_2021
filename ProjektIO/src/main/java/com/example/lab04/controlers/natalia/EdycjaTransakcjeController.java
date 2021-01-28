@@ -159,13 +159,13 @@ public class EdycjaTransakcjeController {
         if(form.getKtoraTransakcja().equals("wplata")) {
             rachunek.setSaldoKonta(rachunek.getSaldoKonta()+form.getKwota());
             rachunek = rachunekRepozytorium.save(rachunek);
-            Historia historia = new Historia(form.getKwota(), LocalDate.now(), "Wpłata", "wplata", rachunek.getSaldoKonta(), daneOsobowe);
+            Historia historia = new Historia(form.getKwota(), LocalDate.now(), "Wpłata", rachunek.getSaldoKonta(), daneOsobowe);
             historiaRepozytorium.save(historia);
         } else if(form.getKtoraTransakcja().equals("wyplata")) {
             if(form.getKwota() < rachunek.getSaldoKonta()) {
                 rachunek.setSaldoKonta(rachunek.getSaldoKonta() - form.getKwota());
                 rachunek = rachunekRepozytorium.save(rachunek);
-                Historia historia = new Historia(form.getKwota(), LocalDate.now(), "Wypłata", "wyplata", rachunek.getSaldoKonta(), daneOsobowe);
+                Historia historia = new Historia(form.getKwota(), LocalDate.now(), "Wypłata", rachunek.getSaldoKonta(), daneOsobowe);
                 historiaRepozytorium.save(historia);
             } else {
                 return "Natalia/funkcjeKonta/transakcja/brakSrodkow";
