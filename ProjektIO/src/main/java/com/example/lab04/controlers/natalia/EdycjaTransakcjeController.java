@@ -31,7 +31,6 @@ public class EdycjaTransakcjeController {
     Limity limity;
     Rachunek rachunek;
     DaneOsobowe daneOsobowe;
-    Zalogowany zalogowany = new Zalogowany();
 
     @PostMapping("/zaloguj")
     public String zaloguj(@ModelAttribute("form") @Valid FormularzDTO form, Errors result, Model model) {
@@ -41,9 +40,6 @@ public class EdycjaTransakcjeController {
 
         bezpieczenstwo = bezpieczenstwoRepozytorium.findByNrKlientaOrPIN(
                 form.getNrKlienta(), form.getNrKlienta());
-        zalogowany.setIdZalogowanego(bezpieczenstwo.getId());
-        zalogowany.setNrZalogowanegoKlienta(bezpieczenstwo.getNrKlienta());
-        zalogowany.setPINzalogowanego(bezpieczenstwo.getPIN());
         model.addAttribute("bezpieczenstwo", bezpieczenstwo);
         daneOsobowe = daneOsoboweRepozytorium.findByBezpieczenstwo(bezpieczenstwo);
         limity = daneOsobowe.getLimity();

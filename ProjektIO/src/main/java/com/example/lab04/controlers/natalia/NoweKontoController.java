@@ -60,7 +60,7 @@ public class NoweKontoController {
         limityRepozytorium.save(limity);
         daneOsobowe.setLimity(limity);
         Bezpieczenstwo bezpieczenstwo = new Bezpieczenstwo();
-        bezpieczenstwo.setNrKlienta(2648675);
+        bezpieczenstwo.setNrKlienta(6641005);
         model.addAttribute("bezpieczenstwo", bezpieczenstwo);
         return "Natalia/noweKonto/bezpieczenstwo";
     }
@@ -70,7 +70,7 @@ public class NoweKontoController {
         if(result.hasErrors()) {
             return "Natalia/noweKonto/bezpieczenstwo";
         }
-        bezpieczenstwo.setNrKlienta(2648675);
+        bezpieczenstwo.setNrKlienta(6641005);
         bezpieczenstwoRepozytorium.save(bezpieczenstwo);
         daneOsobowe.setBezpieczenstwo(bezpieczenstwo);
         Rachunek rachunek = new Rachunek(0.0f, "PLN", daneOsobowe);
