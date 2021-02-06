@@ -50,6 +50,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .authorizeRequests().antMatchers("/h2-console/**").permitAll()
+                .and().csrf().ignoringAntMatchers("/h2-console/**")
+                .and().headers().frameOptions().sameOrigin();
+        //to u góry włącza dostęp do podglądu h2
+        http
 
                 .authorizeRequests()
                 .antMatchers("/n/wyslijPrzelew/**").hasRole("USER")
