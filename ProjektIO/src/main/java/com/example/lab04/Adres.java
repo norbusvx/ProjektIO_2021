@@ -23,7 +23,13 @@ public class Adres {
     private String nrMieszkania;
 
 
-
+    public Adres(String kodPocztowy, String miasto, String ulica, String nrDomu, String nrMieszkania) {
+        this.kodPocztowy = kodPocztowy;
+        this.miasto = miasto;
+        this.ulica = ulica;
+        this.nrDomu = nrDomu;
+        this.nrMieszkania = nrMieszkania;
+    }
 
     public Integer getId() {
         return id;

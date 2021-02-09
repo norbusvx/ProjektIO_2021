@@ -10,14 +10,6 @@ public class Przesylka {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String imieNadawcy;
-
-    private String nazwiskoNadawcy;
-
-    private String imieOdbiorcy;
-
-    private String nazwiskoOdbiorcy;
-
     @ManyToOne
     private Adres adresNadawcy;
 
@@ -31,11 +23,8 @@ public class Przesylka {
     private Integer nrUrzedu;
 
 
-    public Przesylka(String imieNadawcy, String nazwiskoNadawcy, String imieOdbiorcy, String nazwiskoOdbiorcy, Adres adresNadawcy, Adres adresOdbiorcy, Integer nrUrzedu) {
-        this.imieNadawcy = imieNadawcy;
-        this.nazwiskoNadawcy = nazwiskoNadawcy;
-        this.imieOdbiorcy = imieOdbiorcy;
-        this.nazwiskoOdbiorcy = nazwiskoOdbiorcy;
+    public Przesylka(Adres adresNadawcy, Adres adresOdbiorcy, Integer nrUrzedu) {
+
         this.adresNadawcy = adresNadawcy;
         this.adresOdbiorcy = adresOdbiorcy;
         this.nrUrzedu = nrUrzedu;
@@ -49,38 +38,6 @@ public class Przesylka {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getImieNadawcy() {
-        return imieNadawcy;
-    }
-
-    public void setImieNadawcy(String imieNadawcy) {
-        this.imieNadawcy = imieNadawcy;
-    }
-
-    public String getNazwiskoNadawcy() {
-        return nazwiskoNadawcy;
-    }
-
-    public void setNazwiskoNadawcy(String nazwiskoNadawcy) {
-        this.nazwiskoNadawcy = nazwiskoNadawcy;
-    }
-
-    public String getImieOdbiorcy() {
-        return imieOdbiorcy;
-    }
-
-    public void setImieOdbiorcy(String imieOdbiorcy) {
-        this.imieOdbiorcy = imieOdbiorcy;
-    }
-
-    public String getNazwiskoOdbiorcy() {
-        return nazwiskoOdbiorcy;
-    }
-
-    public void setNazwiskoOdbiorcy(String nazwiskoOdbiorcy) {
-        this.nazwiskoOdbiorcy = nazwiskoOdbiorcy;
     }
 
     public Adres getAdresNadawcy() {
@@ -107,19 +64,19 @@ public class Przesylka {
         this.wydana = wydana;
     }
 
-    public Integer getNrUrzedu() {
-        return nrUrzedu;
-    }
-
-    public void setNrUrzedu(Integer nrUrzedu) {
-        this.nrUrzedu = nrUrzedu;
-    }
-
     public boolean iswTransporcie() {
         return wTransporcie;
     }
 
     public void setwTransporcie(boolean wTransporcie) {
         this.wTransporcie = wTransporcie;
+    }
+
+    public Integer getNrUrzedu() {
+        return nrUrzedu;
+    }
+
+    public void setNrUrzedu(Integer nrUrzedu) {
+        this.nrUrzedu = nrUrzedu;
     }
 }
