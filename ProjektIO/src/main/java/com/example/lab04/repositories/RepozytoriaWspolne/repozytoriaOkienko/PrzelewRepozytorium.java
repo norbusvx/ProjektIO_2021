@@ -1,7 +1,8 @@
 package com.example.lab04.repositories.RepozytoriaWspolne.repozytoriaOkienko;
 
-import com.example.lab04.Kasa;
+
+import com.example.lab04.Przelew;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface KasaRepozytorium extends JpaRepository<Kasa, Integer> {
+public interface PrzelewRepozytorium extends JpaRepository<Przelew, Integer> {
 }

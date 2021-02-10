@@ -12,8 +12,63 @@
 
 
 
-tu kiedys bedzie form.
+<form th:method="POST" th:object="${przelew}" action="/Norbert/oplac">
 
+    <input type="text" th:field="*{id}" hidden/>
+
+    Imie Nadawcy: <input type="text" th:field="*{imieNadawcy}"/>
+    <span th:if="${#fields.hasErrors('imieNadawcy')}" th:each="err : ${#fields.errors('imieNadawcy')}" th:text="${err}"></span><br><br>
+
+    Nazwisko Nadawcy: <input type="text" th:field="*{nazwiskoNadawcy}"/>
+    <span th:if="${#fields.hasErrors('nazwiskoNadawcy')}" th:each="err : ${#fields.errors('nazwiskoNadawcy')}" th:text="${err}"></span><br><br>
+
+    Miasto: <input type="text" th:field="*{miastoNadawcy}"/>
+    <span th:if="${#fields.hasErrors('miastoNadawcy')}" th:each="err : ${#fields.errors('miastoNadawcy')}" th:text="${err}"></span><br><br>
+
+    Ulica: <input type="text" th:field="*{ulicaNadawcy}"/>
+    <span th:if="${#fields.hasErrors('ulicaNadawcy')}" th:each="err : ${#fields.errors('ulicaNadawcy')}" th:text="${err}"></span><br><br>
+
+    Nr Domu:<input type="text" th:field="*{nrDomuNadawcy}"/>
+    <span th:if="${#fields.hasErrors('nrDomuNadawcy')}" th:each="err : ${#fields.errors('nrDomuNadawcy')}" th:text="${err}"></span><br><br>
+
+    Nr Mieszkania:<input type="text" th:field="*{nrMieszkaniaNadawcy}"/>
+    <span th:if="${#fields.hasErrors('nrMieszkaniaNadawcy')}" th:each="err : ${#fields.errors('nrMieszkaniaNadawcy')}" th:text="${err}"></span><br><br>
+<br>
+    <br>
+    <br>
+    Imie Odbiorcy: <input type="text" th:field="*{imieOdbiorcy}"/>
+    <span th:if="${#fields.hasErrors('imieOdbiorcy')}" th:each="err : ${#fields.errors('imieOdbiorcy')}" th:text="${err}"></span><br><br>
+
+    Nazwisko Odbiorcy: <input type="text" th:field="*{nazwiskoOdbiorcy}"/>
+    <span th:if="${#fields.hasErrors('nazwiskoOdbiorcy')}" th:each="err : ${#fields.errors('nazwiskoOdbiorcy')}" th:text="${err}"></span><br><br>
+
+    Miasto: <input type="text" th:field="*{miastoOdbiorcy}"/>
+    <span th:if="${#fields.hasErrors('miastoOdbiorcy')}" th:each="err : ${#fields.errors('miastoOdbiorcy')}" th:text="${err}"></span><br><br>
+
+    Ulica: <input type="text" th:field="*{ulicaOdbiorcy}"/>
+    <span th:if="${#fields.hasErrors('ulicaOdbiorcy')}" th:each="err : ${#fields.errors('ulicaOdbiorcy')}" th:text="${err}"></span><br><br>
+
+    Nr Domu:<input type="text" th:field="*{nrDomuOdbiorcy}"/>
+    <span th:if="${#fields.hasErrors('nrDomuOdbiorcy')}" th:each="err : ${#fields.errors('nrDomuOdbiorcy')}" th:text="${err}"></span><br><br>
+
+    Nr Mieszkania:<input type="text" th:field="*{nrMieszkaniaOdbiorcy}"/>
+    <span th:if="${#fields.hasErrors('nrMieszkaniaOdbiorcy')}" th:each="err : ${#fields.errors('nrMieszkaniaOdbiorcy')}" th:text="${err}"></span><br><br>
+
+
+    Kwota:<input type="text" th:field="*{kwota}"/>
+    <span th:if="${#fields.hasErrors('kwota')}" th:each="err : ${#fields.errors('kwota')}" th:text="${err}"></span><br><br>
+
+    <!--    Zostawić to w formie, obejście CSRF  -->
+    <input
+            type="hidden"
+            th:name="${_csrf.parameterName}"
+            th:value="${_csrf.token}" />
+    <!--    Zostawić to w formie, obejście CSRF  -->
+
+    <input type="submit" value="Zatwierdź"/>
+
+
+</form>
 
 
 

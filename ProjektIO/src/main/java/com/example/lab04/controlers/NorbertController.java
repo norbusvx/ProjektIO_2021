@@ -1,11 +1,12 @@
 package com.example.lab04.controlers;
 
 
-import com.example.lab04.Kasa;
-import com.example.lab04.Przesylka;
-import com.example.lab04.Uzytkownik;
+import com.example.lab04.*;
 import com.example.lab04.repositories.RepozytoriaWspolne.PrzesylkaRepozytorium;
 import com.example.lab04.repositories.RepozytoriaWspolne.repozytoriaOkienko.KasaRepozytorium;
+import com.example.lab04.repositories.RepozytoriaWspolne.repozytoriaOkienko.OpakowanieRepozytorium;
+import com.example.lab04.repositories.RepozytoriaWspolne.repozytoriaOkienko.PrzelewRepozytorium;
+import com.example.lab04.repositories.RepozytoriaWspolne.repozytoriaOkienko.SwiadczeniaRepozytorium;
 import com.example.lab04.services.UserDetailServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -33,6 +34,15 @@ public class NorbertController {
     @Autowired
     PrzesylkaRepozytorium przesylkaRepozytorium;
 
+    @Autowired
+    OpakowanieRepozytorium opakowanieRepozytorium;
+
+    @Autowired
+    SwiadczeniaRepozytorium swiadczeniaRepozytorium;
+
+    @Autowired
+    PrzelewRepozytorium przelewRepozytorium;
+
     @GetMapping("/rejestracja")
     public String rejestrujUzytkownika(Model model) {
 
@@ -54,11 +64,25 @@ public class NorbertController {
     }
 
 
-    @GetMapping("/wyslijPrzelew")
+    @GetMapping("/oplac")
     public String wyswietlForm(Model model) {
 
-        //model.addAttribute("uzytkownik", new Uzytkownik());
+        model.addAttribute("przelew", new Przelew());
+
         return "Norbert/wyslijPrzelewForm";
+    }
+
+    @PostMapping(value = {"/oplac"})
+    public String oplac(@ModelAttribute Przelew przelew, BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
+            return "Norbert/glowna";
+        }
+
+
+        przelewRepozytorium.save(przelew);
+
+        return "Norbert/glowna";
     }
 
     @GetMapping("/glowna")
@@ -67,7 +91,6 @@ public class NorbertController {
 
         return "Norbert/glowna";
     }
-
 
 
     @GetMapping("/kasa")
@@ -97,7 +120,7 @@ public class NorbertController {
             Model model,
             @PageableDefault(sort = "ID") Pageable pageable) {
 
-        Page page=kasaRepozytorium.findAll(pageable);
+        Page page = kasaRepozytorium.findAll(pageable);
 
 
         model.addAttribute("page", page);
@@ -111,7 +134,7 @@ public class NorbertController {
             @PageableDefault(sort = "id") Pageable pageable) {
 
         int nrUrzedu = userDetailServiceImplementation.zwrocUzytkownika().getNrUrzedu();
-        Page page = przesylkaRepozytorium.findObrazByWydanaAndNrUrzedu(false, nrUrzedu, pageable);
+        Page page = przesylkaRepozytorium.findObrazByWydanaAndNrUrzeduAndCzyWZbiorczym(false, nrUrzedu, false, pageable);
 
 
         model.addAttribute("page", page);
@@ -137,7 +160,7 @@ public class NorbertController {
             @PageableDefault(sort = "id") Pageable pageable) {
 
         int nrUrzedu = userDetailServiceImplementation.zwrocUzytkownika().getNrUrzedu();
-        Page page = przesylkaRepozytorium.findObrazByWydanaAndTransportowanaAndNrUrzeduNotLike(false, true, nrUrzedu, pageable);
+        Page page = przesylkaRepozytorium.findObrazByWydanaAndTransportowanaAndNrUrzeduNotLikeAndCzyWZbiorczym(false, true, nrUrzedu, false, pageable);
 
 
         model.addAttribute("page", page);
@@ -156,5 +179,135 @@ public class NorbertController {
 
         return "Norbert/glowna";
     }
+
+    //przekaż do transportu*******************************************************************************************
+
+    @RequestMapping(value = {"/dajDoTransportu"})
+    public String dajDoT(
+            Model model,
+            @PageableDefault(sort = "id") Pageable pageable) {
+
+        int nrUrzedu = userDetailServiceImplementation.zwrocUzytkownika().getNrUrzedu();
+        Page page = przesylkaRepozytorium.findObrazByWydanaAndTransportowanaNotLikeAndNrUrzeduAndCzyWZbiorczym(false, true, nrUrzedu, false, pageable);
+
+
+        model.addAttribute("page", page);
+
+        return "Norbert/dajDoTransportu";
+    }
+
+    @GetMapping("/daj/{id}")
+    public String daj(@PathVariable(name = "id") int id, Model model) {
+        int index = id;
+        int nrUrzedu = userDetailServiceImplementation.zwrocUzytkownika().getNrUrzedu();
+        Przesylka p = przesylkaRepozytorium.findById(index).get();
+        p.setwTransporcie(true);
+        przesylkaRepozytorium.save(p);
+
+        return "Norbert/glowna";
+    }
+
+    //zbiorcze ***************************************************************************************************
+
+    @RequestMapping(value = {"/dodajZbiorcze"})
+    public String dodajZbiorcze(
+            Model model,
+            @PageableDefault(sort = "id") Pageable pageable) {
+
+        int nrUrzedu = userDetailServiceImplementation.zwrocUzytkownika().getNrUrzedu();
+        Page page = przesylkaRepozytorium.findObrazByWydanaAndTransportowanaNotLikeAndNrUrzeduAndOpakowanieZbiorcze(false, true, nrUrzedu, false, pageable);
+
+
+        model.addAttribute("page", page);
+
+        return "Norbert/dodajZbiorcze";
+    }
+
+
+    @GetMapping("/dodajZ/{id}")
+    public String dodajZ(@PathVariable(name = "id") int id, Model model) {
+        int index = id;
+        Przesylka p = przesylkaRepozytorium.findById(index).get();
+        p.setOpakowanieZbiorcze(true);
+        przesylkaRepozytorium.save(p);
+        opakowanieRepozytorium.save(new OpakowanieZbiorcze(p));
+
+        return "Norbert/glowna";
+    }
+
+    @RequestMapping(value = {"/dodajDoZbiorczego"})
+    public String dodajDoZbiorcze(
+            Model model,
+            @PageableDefault(sort = "id") Pageable pageable) {
+
+        int nrUrzedu = userDetailServiceImplementation.zwrocUzytkownika().getNrUrzedu();
+        Page page = przesylkaRepozytorium.findObrazByWydanaAndTransportowanaNotLikeAndNrUrzeduAndOpakowanieZbiorcze(false, true, nrUrzedu, true, pageable);
+
+
+        model.addAttribute("page", page);
+
+        return "Norbert/dodajDoZbiorczego";
+    }
+
+
+    @GetMapping("/dodajDoZ/{id}")
+    public String dodajDoZ(@PathVariable(name = "id") int id, Model model,
+                           @PageableDefault(sort = "id") Pageable pageable) {
+        int index = id;
+        int nrUrzedu = userDetailServiceImplementation.zwrocUzytkownika().getNrUrzedu();
+        Page page = przesylkaRepozytorium.findObrazByWydanaAndTransportowanaNotLikeAndNrUrzeduAndCzyWZbiorczymAndIdNotLike(false, true, nrUrzedu, false, index, pageable);
+        model.addAttribute("page", page);
+
+        Przesylka p = przesylkaRepozytorium.findById(index).get();//przesyłka która jest opakowaniem
+
+        OpakowanieZbiorcze o = opakowanieRepozytorium.findObrazByOpakowanie(p);
+        model.addAttribute("opakowanie", o);
+
+        return "Norbert/dodajDoZ";
+    }
+
+    @GetMapping("/dodajDoZ2/{id}")
+    public String dodajDoZ2(@PathVariable(name = "id") int id, @ModelAttribute OpakowanieZbiorcze o){
+
+        int index = id;
+
+
+
+        Przesylka p = przesylkaRepozytorium.findById(index).get();
+        o.dodajPrzesylke(p);
+        opakowanieRepozytorium.save(o);
+
+
+
+        return "Norbert/glowna";
+    }
+
+    //wypłata świadczeń************************************************************************************************************************
+
+    @RequestMapping(value = {"/wyplac"})
+    public String wyplac(
+            Model model,
+            @PageableDefault(sort = "id") Pageable pageable) {
+
+
+        Page page = swiadczeniaRepozytorium.findSwiadczeniesByStatus(false, pageable);
+
+
+        model.addAttribute("page", page);
+
+        return "Norbert/wyplacSwiadczenie";
+    }
+
+    @GetMapping("/wyplacSw/{id}")
+    public String wyplacSw(@PathVariable(name = "id") int id, Model model) {
+        int index = id;
+
+        Swiadczenie p = swiadczeniaRepozytorium.findById(index).get();
+        p.setStatus(true);
+        swiadczeniaRepozytorium.save(p);
+
+        return "Norbert/glowna";
+    }
+
 
 }

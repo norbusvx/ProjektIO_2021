@@ -24,6 +24,10 @@ public class Przesylka {
 
     private boolean transportowana;
 
+    private boolean opakowanieZbiorcze;
+
+    private boolean czyWZbiorczym;
+
     private Integer nrUrzedu;
 
     public Przesylka() {
@@ -42,6 +46,8 @@ public class Przesylka {
         this.nrUrzedu = nrUrzedu;
         this.transportowana = false;
         this.wydana = false;
+        this.opakowanieZbiorcze = false;
+        this.czyWZbiorczym=false;
     }
 
     public Integer getId() {
@@ -122,5 +128,29 @@ public class Przesylka {
 
     public void setNazwiskoNadawcy(String nazwiskoNadawcy) {
         this.nazwiskoNadawcy = nazwiskoNadawcy;
+    }
+
+    public boolean isTransportowana() {
+        return transportowana;
+    }
+
+    public void setTransportowana(boolean transportowana) {
+        this.transportowana = transportowana;
+    }
+
+    public boolean isOpakowanieZbiorcze() {
+        return opakowanieZbiorcze;
+    }
+
+    public void setOpakowanieZbiorcze(boolean opakowanieZbiorcze) {
+        this.opakowanieZbiorcze = opakowanieZbiorcze;
+    }
+
+    public boolean isCzyWZbiorczym() {
+        return czyWZbiorczym;
+    }
+
+    public void setCzyWZbiorczym(boolean czyWZbiorczym) {
+        this.czyWZbiorczym = czyWZbiorczym;
     }
 }

@@ -7,6 +7,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PrzesylkaRepozytorium extends JpaRepository<Przesylka, Integer> {
-    Page<Przesylka> findObrazByWydanaAndNrUrzedu(Boolean wydana, Integer nrUrzedu,  Pageable pageable);
-    Page<Przesylka> findObrazByWydanaAndTransportowanaAndNrUrzeduNotLike(Boolean wydana, Boolean wTransporcie, Integer nrUrzedu, Pageable pageable);
+    Page<Przesylka> findObrazByWydanaAndNrUrzeduAndCzyWZbiorczym(Boolean wydana, Integer nrUrzedu,Boolean czyWZbiorczym,  Pageable pageable);
+    Page<Przesylka> findObrazByWydanaAndTransportowanaAndNrUrzeduNotLikeAndCzyWZbiorczym(Boolean wydana, Boolean wTransporcie, Integer nrUrzedu,Boolean czyWZbiorczym, Pageable pageable);
+    Page<Przesylka> findObrazByWydanaAndTransportowanaNotLikeAndNrUrzeduAndCzyWZbiorczym(Boolean wydana, Boolean wTransporcie, Integer nrUrzedu,Boolean czyWZbiorczym, Pageable pageable);
+    Page<Przesylka> findObrazByWydanaAndTransportowanaNotLikeAndNrUrzeduAndOpakowanieZbiorcze(Boolean wydana, Boolean wTransporcie, Integer nrUrzedu,Boolean opakowanieZbiorcze, Pageable pageable);
+    Page<Przesylka> findObrazByWydanaAndTransportowanaNotLikeAndNrUrzeduAndCzyWZbiorczymAndIdNotLike(Boolean wydana, Boolean wTransporcie, Integer nrUrzedu,Boolean czyWZbiorczym, Integer id, Pageable pageable);
 }

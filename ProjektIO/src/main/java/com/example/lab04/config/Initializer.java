@@ -3,6 +3,7 @@ package com.example.lab04.config;
 
 import com.example.lab04.Adres;
 import com.example.lab04.Przesylka;
+import com.example.lab04.Swiadczenie;
 import com.example.lab04.Uzytkownik;
 
 import com.example.lab04.models.Natalia.*;
@@ -11,6 +12,7 @@ import com.example.lab04.repositories.RepozytoriaWspolne.PrzesylkaRepozytorium;
 import com.example.lab04.repositories.RepozytoriaWspolne.UzytkownikRepozytorium;
 import com.example.lab04.repositories.RepozytoriaWspolne.bankPocztowy.*;
 import com.example.lab04.repositories.RepozytoriaWspolne.repozytoriaOkienko.KasaRepozytorium;
+import com.example.lab04.repositories.RepozytoriaWspolne.repozytoriaOkienko.SwiadczeniaRepozytorium;
 import com.example.lab04.services.UserDetailServiceImplementation;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,8 @@ public class Initializer {
     PrzesylkaRepozytorium przesylkaRepozytorium;
     @Autowired
     AdresRepozytorium adresRepozytorium;
+    @Autowired
+    SwiadczeniaRepozytorium swiadczeniaRepozytorium;
 
 
 
@@ -64,8 +68,7 @@ public class Initializer {
             }
 
 
-            przesylkaRepozytorium.deleteAll();
-            adresRepozytorium.deleteAll();
+
             if (przesylkaRepozytorium.findAll().isEmpty()){
                 Adres adresOdbiorcy = new Adres("05-300", "Mińsk Mazowiecki", "Dębowa", "55c", "");
                 adresRepozytorium.save(adresOdbiorcy);
@@ -95,6 +98,23 @@ public class Initializer {
                 przesylka=new Przesylka("Norbert", "Koko","On", "Ten",adresNadawcy, adresOdbiorcy, 4);
                 przesylka.setwTransporcie(true);
                 przesylkaRepozytorium.save(przesylka);
+
+                adresOdbiorcy = new Adres("00-000", "Urząd nr 1", "", "", "");
+                adresRepozytorium.save(adresOdbiorcy);
+                adresNadawcy = new Adres("00-000", "Urząd nr 2", "", "", "");
+                adresRepozytorium.save(adresNadawcy);
+                przesylka=new Przesylka("Urząd 1", "","Urząd 2", "",adresNadawcy, adresOdbiorcy, 1);
+                przesylka.setwTransporcie(false);
+                przesylkaRepozytorium.save(przesylka);
+            }
+
+            if (swiadczeniaRepozytorium.findAll().isEmpty()){
+                Adres adresOdbiorcy = new Adres("05-300", "Mińsk Mazowiecki", "Dębowa", "55c", "");
+                adresRepozytorium.save(adresOdbiorcy);
+                Swiadczenie swiadczenie = new Swiadczenie("Janko","Konca",adresOdbiorcy, false, 5000);
+                swiadczeniaRepozytorium.save(swiadczenie);
+                swiadczenie = new Swiadczenie("Janka","Kotwica",adresOdbiorcy, false, 3000);
+                swiadczeniaRepozytorium.save(swiadczenie);
             }
         };
     }
