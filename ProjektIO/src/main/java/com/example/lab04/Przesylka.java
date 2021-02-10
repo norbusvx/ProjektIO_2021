@@ -10,6 +10,10 @@ public class Przesylka {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String imieOdbiorcy;
+    private String nazwiskoOdbiorcy;
+    private String imieNadawcy;
+    private String nazwiskoNadawcy;
     @ManyToOne
     private Adres adresNadawcy;
 
@@ -18,18 +22,26 @@ public class Przesylka {
 
     private boolean wydana;
 
-    private boolean wTransporcie;
+    private boolean transportowana;
 
     private Integer nrUrzedu;
 
+    public Przesylka() {
+    }
 
-    public Przesylka(Adres adresNadawcy, Adres adresOdbiorcy, Integer nrUrzedu) {
+
+    public Przesylka(String imieOdbiorcy, String nazwiskoOdbiorcy, String imieNadawcy, String nazwiskoNadawcy, Adres adresNadawcy, Adres adresOdbiorcy, Integer nrUrzedu) {
+
+        this.imieOdbiorcy = imieOdbiorcy;
+        this.nazwiskoOdbiorcy = nazwiskoOdbiorcy;
+        this.imieNadawcy = imieNadawcy;
+        this.nazwiskoNadawcy = nazwiskoNadawcy;
 
         this.adresNadawcy = adresNadawcy;
         this.adresOdbiorcy = adresOdbiorcy;
         this.nrUrzedu = nrUrzedu;
-        this.wTransporcie=false;
-        this.wydana=false;
+        this.transportowana = false;
+        this.wydana = false;
     }
 
     public Integer getId() {
@@ -65,11 +77,11 @@ public class Przesylka {
     }
 
     public boolean iswTransporcie() {
-        return wTransporcie;
+        return transportowana;
     }
 
     public void setwTransporcie(boolean wTransporcie) {
-        this.wTransporcie = wTransporcie;
+        this.transportowana = wTransporcie;
     }
 
     public Integer getNrUrzedu() {
@@ -78,5 +90,37 @@ public class Przesylka {
 
     public void setNrUrzedu(Integer nrUrzedu) {
         this.nrUrzedu = nrUrzedu;
+    }
+
+    public String getImieOdbiorcy() {
+        return imieOdbiorcy;
+    }
+
+    public void setImieOdbiorcy(String imieOdbiorcy) {
+        this.imieOdbiorcy = imieOdbiorcy;
+    }
+
+    public String getNazwiskoOdbiorcy() {
+        return nazwiskoOdbiorcy;
+    }
+
+    public void setNazwiskoOdbiorcy(String nazwiskoOdbiorcy) {
+        this.nazwiskoOdbiorcy = nazwiskoOdbiorcy;
+    }
+
+    public String getImieNadawcy() {
+        return imieNadawcy;
+    }
+
+    public void setImieNadawcy(String imieNadawcy) {
+        this.imieNadawcy = imieNadawcy;
+    }
+
+    public String getNazwiskoNadawcy() {
+        return nazwiskoNadawcy;
+    }
+
+    public void setNazwiskoNadawcy(String nazwiskoNadawcy) {
+        this.nazwiskoNadawcy = nazwiskoNadawcy;
     }
 }

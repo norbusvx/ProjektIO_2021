@@ -63,12 +63,37 @@ public class Initializer {
                 userDetailServiceImplementation.dodajUzytkownika(uzytkownik);
             }
 
+
+            przesylkaRepozytorium.deleteAll();
+            adresRepozytorium.deleteAll();
             if (przesylkaRepozytorium.findAll().isEmpty()){
                 Adres adresOdbiorcy = new Adres("05-300", "Mińsk Mazowiecki", "Dębowa", "55c", "");
                 adresRepozytorium.save(adresOdbiorcy);
                 Adres adresNadawcy = new Adres("05-300", "Targówka", "Okoniowa", "55c", "12");
                 adresRepozytorium.save(adresNadawcy);
-                Przesylka przesylka=new Przesylka(adresNadawcy, adresOdbiorcy, 3);
+                Przesylka przesylka=new Przesylka("Jan","Kowalski", "Antonio", "Banderaz",adresNadawcy, adresOdbiorcy, 1);
+                przesylkaRepozytorium.save(przesylka);
+
+                adresOdbiorcy = new Adres("05-306", "Anielik", "Dębowata", "5c", "333");
+                adresRepozytorium.save(adresOdbiorcy);
+                adresNadawcy = new Adres("05-444", "Targ Starz", "Ulicynowa", "60", "");
+                adresRepozytorium.save(adresNadawcy);
+                przesylka=new Przesylka("Aleks", "Bonapartek","Kmić", "Jarema",adresNadawcy, adresOdbiorcy, 4);
+                przesylkaRepozytorium.save(przesylka);
+
+                adresOdbiorcy = new Adres("05-302", "Topolek", "Dębowata", "52c", "32");
+                adresRepozytorium.save(adresOdbiorcy);
+                adresNadawcy = new Adres("05-480", "Tartarz", "Ulicka", "63", "12");
+                adresRepozytorium.save(adresNadawcy);
+                przesylka=new Przesylka("Róża", "Biała", "Oleks", "Tak",adresNadawcy, adresOdbiorcy, 4);
+                przesylkaRepozytorium.save(przesylka);
+
+                adresOdbiorcy = new Adres("05-444", "Targ Starz", "Ulicynowa", "60", "");
+                adresRepozytorium.save(adresOdbiorcy);
+                adresNadawcy = new Adres("05-300", "Mińsk Mazowiecki", "Dębowa", "55c", "5");
+                adresRepozytorium.save(adresNadawcy);
+                przesylka=new Przesylka("Norbert", "Koko","On", "Ten",adresNadawcy, adresOdbiorcy, 4);
+                przesylka.setwTransporcie(true);
                 przesylkaRepozytorium.save(przesylka);
             }
         };

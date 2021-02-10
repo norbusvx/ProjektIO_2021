@@ -23,7 +23,11 @@ public class Adres {
     private String nrMieszkania;
 
 
-    public Adres(String kodPocztowy, String miasto, String ulica, String nrDomu, String nrMieszkania) {
+    public Adres(){
+
+    }
+
+    public Adres( String kodPocztowy, String miasto, String ulica, String nrDomu, String nrMieszkania) {
         this.kodPocztowy = kodPocztowy;
         this.miasto = miasto;
         this.ulica = ulica;
